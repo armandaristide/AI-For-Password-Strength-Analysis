@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🔐 AI Password Strength Checker</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button onclick="checkPassword()">Check Strength</button>
+    
+    <div id="result"></div>
+
+    <script>
+        function checkPassword() {
+            let password = document.getElementById("passwordInput").value;
+            if (!password) {
+                alert("Please enter a password");
+                return;
+            }
+
+            fetch(`http://127.0.0.1:8000/predict/?password=${password}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("result").innerHTML = 
+                        `Strength: ${data.strength} <br> Confidence: ${data.confidence.toFixed(2)}`;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    document.getElementById("result").innerHTML = "Error checking password strength";
+                });
+        }
+    </script>
+
+</body>
+</html>
+
