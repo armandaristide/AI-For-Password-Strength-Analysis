@@ -15,6 +15,7 @@ project_root/
 │── app.py  # Streamlit UI and backend logic
 │── preprocessed_passwords.csv  # Training dataset
 │── tokenizer.pkl  # Trained ML model
+│── tpassword_strength_lstm.H5  # Trained LSTM model
 ├── passwordstrength.ipynb  # Jupyter Notebook for exploration
 │── rockyou dataset.txt  # Link to download the dataset used for training the model
 ```
