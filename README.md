@@ -6,65 +6,51 @@ This project utilizes a Long Short-Term Memory (LSTM) model, a type of recurrent
 The **AI Password Strength Checker** is a web application that evaluates password strength using machine learning models. It leverages **FastAPI** for the backend and a simple **HTML, CSS, and JavaScript** frontend for user interaction. The backend processes password inputs and provides a security score, helping users create stronger passwords.
 
 ## Technology Stack
-- **Backend**: FastAPI (Python)
-- **Frontend**: HTML, JavaScript, and Fetch API
-- **Machine Learning**: TensorFlow
-- **Deployment**: Uvicorn (for running FastAPI)
+- **Framework**: Streamlit (Python)
+- **Machine Learning**: TensorFlow, scikit-learn
 
 ## Project Structure
 ```
 project_root/
-│── main.py  # FastAPI backend
-│── model.py  # ML model loading and evaluation
-│── index.html  # UI
-│── leaked_passwords.csv  # Training dataset
-│── password_strength_model.pkl  # Trained ML model
+│── app.py  # Streamlit UI and backend logic
+│── preprocessed_passwords.csv  # Training dataset
+│── tokenizer.pkl  # Trained ML model
+├── passwordstrength.ipynb  # Jupyter Notebook for exploration
+│── rockyou dataset.txt  # Link to download the dataset used for training the model
 ```
 
 ## How to Run the Project
 
 ### 1️⃣ Install Dependencies
-Ensure you have Python installed, then install FastAPI and Uvicorn:
+Ensure you have Python installed, then install the required dependencies:
 ```bash
-pip install fastapi uvicorn scikit-learn pandas
+pip install streamlit scikit-learn pandas pickle5
 ```
 
-### 2️⃣ Run the FastAPI Server
-Navigate to the project folder and run:
+### 2️⃣ Run the Streamlit App
+Navigate to the project root and run:
 ```bash
-uvicorn main:app --reload
+streamlit run app.py
 ```
-This starts the API at `http://127.0.0.1:8000`.
+This starts the UI in your browser.
 
-### 3️⃣ Start the Frontend
-Open `index.html` in a browser.
-
-### 4️⃣ Check Password Strength
-- Enter a password in the input field.
+### 3️⃣ Check Password Strength
+- Enter a password in the Streamlit input field.
 - Click **Check Strength**.
-- The result is fetched from FastAPI and displayed.
+- The result is displayed directly in the UI.
 
-## API Endpoints
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST   | `/predict` | Predicts password strength |
-| GET    | `/status`  | Health check endpoint |
+  ![image](https://github.com/user-attachments/assets/df23cfc0-12dc-4fb0-9431-76078257a707)
+
 
 ## Troubleshooting
-- If `Address already in use` error appears, kill the existing process:
+- If the app does not launch, ensure all dependencies are installed properly.
+- If you get a `ModuleNotFoundError`, reinstall the missing package using:
   ```bash
-  sudo lsof -i :8000
-  sudo kill -9 <PID>
+  pip install <missing_package>
   ```
-- If the frontend does not fetch results, ensure FastAPI is running and update JavaScript to use `http://127.0.0.1:8000/predict`.
+- If an error occurs with the ML model, ensure the `tokenizer.pkl` file exists in thesame folder as the app.py.
 
 
-## Features
-
-- **AI-powered password strength analysis**
-- **FastAPI backend for processing requests**
-- **Interactive frontend for user input**
-- **Real-time feedback on password security**
 
 ## Contributing
 
